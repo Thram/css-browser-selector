@@ -12,19 +12,106 @@ https://github.com/verbatim/css_browser_selector
 showLog=true;
 function log(m) {if ( window.console && showLog ) {console.log(m); }  }
 
-function css_browser_selector(u)
-	{
+var Matcher = function(){
+	var Matcher = function(options){ /*{className, testRegex, subMatchers}*/
+		this.className = options.className;
+		this.filterRegex = options.filterRegex;
+		this.subMatchers = options.subMatchers;
+	}
+
+	Matcher.prototype = {
+		className: null, 	// string/function(ua){}
+		subMatchers: null, 	// [MatcherGroups]
+		regex: null,
+		evaluateSubMatchers: function(ua){
+			var classNames = [];
+			for(var i in this.subMatchers){
+				classNames = classNames.concat(this.subMatchers[i].evaluate(ua));
+			}
+			return classNames;
+		},
+		evaluate: function(ua){
+			ua = ua.toLowerCase();
+			var classNames = [];
+			
+			if(!this.filterRegex || this.filterRegex.test(ua)){
+				if(this.className) 
+					classNames.push(this._getClassName(ua));
+
+				if(this.subMatchers) 
+					classNames = classNames.concat(this.evaluateSubMatchers(ua));
+			}
+
+			return classNames;
+		},
+		_getClassName: function(ua){
+			if(typeof(this.className) == 'string')
+				return this.className;
+			else if (typeof(this.className) == 'function')
+				return this.className(ua);
+			else if (this.className instanceof RegExp)
+				return this.className.exec(ua).slice(1);
+		}
+	}
+
+	return Matcher;
+}();
+
+var MatcherGroup = function(){
+	var MatcherGroup = function(matcherArray, exclusive){
+		this.matcherArray = matcherArray;
+		this.exclusive = exclusive;
+	}
+
+	MatcherGroup.prototype = {
+		matcherArray: null,
+		exclusive: null,
+		evaluate: function(ua){
+			var classNames = [];
+
+			for(var i in this.matcherArray){
+				var subClassNames = this.matcherArray[i].evaluate(ua);
+				if(typeof(subClassNames) != 'undefined')
+					classNames = classNames.concat(subClassNames);
+
+				if(this.exclusive) 
+					return classNames;
+			}
+			return classNames;
+		}
+	}
+
+	return MatcherGroup;
+}();
+
+var testIEMatcher = new Matcher({
+	className: 'ie',
+	filterRegex: /msie/,
+	subMatchers:[
+		new MatcherGroup([
+			new Matcher({
+				className: function(ua){
+					return 'ie' + /msie\s(\d{1,2})/.exec(ua)[1];
+				}
+			})
+		], true)
+	]
+});
+
+console.log(testIEMatcher.evaluate("Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0; chromeframe/12.0.742.112)"));
+console.log(testIEMatcher.evaluate("Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.7.13) Gecko/20060410 Firefox/1.0.8" ));
+
+function css_browser_selector(u){
 	var	uaInfo = {},
 		screens = [320, 480, 640, 768, 1024, 1152, 1280, 1440, 1680, 1920, 2560],
 		allScreens = screens.length,
 		ua=u.toLowerCase(),
 		is=function(t) { return RegExp(t,"i").test(ua);  },
-		version = function(p,n) 
-			{ 
+		version = function(p,n) { 
 			n=n.replace(".","_"); var i = n.indexOf('_'),  ver=""; 
 			while (i>0) {ver += " "+ p+n.substring(0,i);i = n.indexOf('_', i+1);} 
 			ver += " "+p+n; return ver; 
-			},
+		},
 		g='gecko',
 		w='webkit',
 		c='chrome',
@@ -128,8 +215,7 @@ function css_browser_selector(u)
 		
 		]; // b
 
-    function screenSize() 
-    	{
+    function screenSize() {
 		var w = window.outerWidth || html.clientWidth;
 		var h = window.outerHeight || html.clientHeight;
 		uaInfo.orientation = ((w<h) ? "portrait" : "landscape");
@@ -140,7 +226,7 @@ function css_browser_selector(u)
         for (var info in uaInfo) { widthClasses+=" "+info+"_"+ uaInfo[info]  };
 		html.className =  ( html.className +widthClasses  );
 		return widthClasses;
-    	} // screenSize
+    }
 	
     window.onresize = screenSize;
 	screenSize();	
@@ -149,7 +235,7 @@ function css_browser_selector(u)
 	html.className =   ( cssbs + html.className.replace(/\b(no[-|_]?)?js\b/g,"")  ).replace(/^ /, "").replace(/ +/g," ");
 
 	return cssbs;
-	}
+}
 	
 css_browser_selector(navigator.userAgent);
 
