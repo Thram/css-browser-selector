@@ -1,8 +1,302 @@
 /*
-CSS Browser Selector v0.4.0 (Nov 02, 2010)
-Rafael Lima (http://rafael.adm.br)
+CSS Browser Selector 0.6.1
+Originally written by Rafael Lima (http://rafael.adm.br)
 http://rafael.adm.br/css_browser_selector
 License: http://creativecommons.org/licenses/by/2.5/
-Contributors: http://rafael.adm.br/css_browser_selector#contributors
+
+Co-maintained by:
+https://github.com/verbatim/css_browser_selector
+
 */
-function css_browser_selector(u){var ua=u.toLowerCase(),is=function(t){return ua.indexOf(t)>-1},g='gecko',w='webkit',s='safari',o='opera',m='mobile',h=document.documentElement,b=[(!(/opera|webtv/i.test(ua))&&/msie\s(\d)/.test(ua))?('ie ie'+RegExp.$1):is('firefox/2')?g+' ff2':is('firefox/3.5')?g+' ff3 ff3_5':is('firefox/3.6')?g+' ff3 ff3_6':is('firefox/3')?g+' ff3':is('gecko/')?g:is('opera')?o+(/version\/(\d+)/.test(ua)?' '+o+RegExp.$1:(/opera(\s|\/)(\d+)/.test(ua)?' '+o+RegExp.$2:'')):is('konqueror')?'konqueror':is('blackberry')?m+' blackberry':is('android')?m+' android':is('chrome')?w+' chrome':is('iron')?w+' iron':is('applewebkit/')?w+' '+s+(/version\/(\d+)/.test(ua)?' '+s+RegExp.$1:''):is('mozilla/')?g:'',is('j2me')?m+' j2me':is('iphone')?m+' iphone':is('ipod')?m+' ipod':is('ipad')?m+' ipad':is('mac')?'mac':is('darwin')?'mac':is('webtv')?'webtv':is('win')?'win'+(is('windows nt 6.0')?' vista':''):is('freebsd')?'freebsd':(is('x11')||is('linux'))?'linux':'','js']; c = b.join(' '); h.className += ' '+c; return c;}; css_browser_selector(navigator.userAgent);
+var css_browser_selector = function(ua, el, userMatchers){
+	var Matcher = function(){
+		var Matcher = function(options){
+			this.className = options.className;
+			this.filterRegex = options.filterRegex;
+			this.subMatchers = options.subMatchers;
+		}
+
+		Matcher.prototype = {
+			className: null, 	// string/function(ua){}
+			subMatchers: null, 	// [MatcherGroups]
+			regex: null,
+			evaluateSubMatchers: function(ua){
+				var classNames = [];
+				for(var i in this.subMatchers){
+					classNames = classNames.concat(this.subMatchers[i].evaluate(ua));
+				}
+				return classNames;
+			},
+			evaluate: function(ua){
+				var classNames = [];
+				
+				if(!this.filterRegex || this.filterRegex.test(ua)){
+					if(this.className) 
+						classNames = classNames.concat(this._getClassName(ua) || []);
+
+					if(this.subMatchers) 
+						classNames = classNames.concat(this.evaluateSubMatchers(ua));
+				}
+
+				return classNames;
+			},
+			_getClassName: function(ua){
+				if(typeof(this.className) == 'string' || this.className instanceof Array)
+					return this.className;
+				else if (typeof(this.className) == 'function')
+					return this.className(ua);
+				else if (this.className instanceof RegExp)
+					return this.className.exec(ua).slice(1);
+			}
+		}
+
+		return Matcher;
+	}();
+
+	var MatcherGroup = function(){
+		var MatcherGroup = function(matcherArray, exclusive){
+			this.matcherArray = matcherArray;
+			this.exclusive = exclusive;
+		}
+
+		MatcherGroup.prototype = {
+			matcherArray: null,
+			exclusive: null,
+			evaluate: function(ua){
+				var classNames = [];
+
+				for(var i in this.matcherArray){
+					var subClassNames = this.matcherArray[i].evaluate(ua);
+					if(typeof(subClassNames) != 'undefined' && subClassNames.length > 0){
+						classNames = classNames.concat(subClassNames);
+						if(this.exclusive) 
+							return classNames;
+					}
+				}
+				return classNames;
+			}
+		}
+
+		return MatcherGroup;
+	}();
+
+
+
+	/* Matcher Definitions */
+	var browserMatcherGroup = new MatcherGroup([
+		new Matcher({
+			className: 'opera',
+			filterRegex: /opera/i,
+			subMatchers:[
+				new MatcherGroup([
+					new Matcher({
+						className: function(ua){
+							var matches = /version\/((\d+)(\.(\d+))(\.\d+)*)/i.exec(ua);
+							if(matches)
+								return ['opera'+matches[2], 'opera'+matches[2]+'_'+matches[4]];
+						}
+					}),
+					new Matcher({
+						className: function(ua){
+							var matches = /opera(\s|\/)(\d+)\.(\d+)/i.exec(ua);
+							if(matches)
+								return ['opera'+matches[2], 'opera'+matches[2]+'_'+matches[3]];
+						}
+					})
+				], true)
+			]		
+		}),
+		new Matcher({
+			className: 'ie',
+			filterRegex: /msie|trident/i,
+			subMatchers:[
+				new MatcherGroup([
+					new Matcher({
+						className: function(ua){
+							var matches = /msie\s(\d{1,2})/i.exec(ua);
+							if(matches){
+								return 'ie' + matches[1];
+							}
+
+							matches = /trident\/(\d+)\.0/i.exec(ua);
+							if(matches[1]){
+								var verMap = {'7':'11','6':'10','5':'9','4':'8'};
+								if(verMap[matches[1]])
+									return 'ie' + verMap[matches[1]];
+							}
+						}
+					})
+				], true)
+			]
+		}),
+		new Matcher({className: 'konqueror', filterRegex: /konqueror/i }),
+		new Matcher({className: ['webkit', 'iron'], filterRegex: /iron/i }),
+		new Matcher({
+			className: 'blackberry',
+			filterRegex: /blackberry/i,
+			subMatchers:[
+				new MatcherGroup([
+					new Matcher({
+						className: function(ua){
+							var matches = /Version\/(\d+)(\.(\d+)+)/i.exec(ua);
+
+							if(matches){
+								var classes =  ['blackberry'+matches[1]];
+								if(matches[3] > 0)
+									classes.push('blackberry'+matches[1]+'_'+matches[3]);
+								return classes;
+							}
+						}
+					})
+				], true)
+			]
+		}),
+		new Matcher({
+			className: ['webkit', 'chrome'],
+			filterRegex: /chrome/i,
+			subMatchers:[
+				new MatcherGroup([
+					new Matcher({
+						className: function(ua){
+							var matches = /chrome\/((\d+)(\.(\d+))(\.\d+)*)/i.exec(ua);
+							if(matches)
+								return ['chrome' + matches[2] , 'chrome' + matches[2] + "_" + matches[4]];
+						}
+					})
+				], true)
+			]
+		}),
+		new Matcher({
+			className:['webkit', 'safari'],
+			filterRegex:/applewebkit/i,
+			subMatchers:[
+				new MatcherGroup([
+					new Matcher({
+						className: function(ua){
+							var matches = /version\/((\d+)(\.(\d+))(\.\d+)*)/.exec(ua);
+							if(matches){
+								var version = 'safari' + (matches[4] > 0 ? matches[2] + matches[3] : matches[2]).replace('.','_');
+								return [version];
+							}
+
+							matches = / Safari\/(\d+)/i.exec(ua);
+							var wkVersion = parseInt(matches[1]);
+							if(wkVersion){
+								if(wkVersion < 100) return ['safari1_0'];
+								else if(wkVersion < 125) return ['safari1_2'];
+								else if(wkVersion < 412) return ['safari1_3'];
+								else if(wkVersion < 522) return ['safari2_0'];
+							}
+						}
+					})
+				], true)
+			]
+		}),
+		new Matcher({
+			className: 'gecko',
+			filterRegex: /gecko/i,
+			subMatchers:[
+				new MatcherGroup([
+					new Matcher({
+						className: function(ua){
+							var matches = /firefox\/((\d+)(\.(\d+))(\.\d+)*)/i.exec(ua);
+							if(matches){
+								var classes =  ['ff'+matches[2]];
+								if(matches[4] > 0)
+									classes.push('ff'+matches[2]+'_'+matches[4]);
+								return classes;
+							}
+						}
+					})
+				], true)
+			]		
+		}),
+		new Matcher({className: 'gecko', filterRegex: /mozilla/i })
+	], true);
+		
+
+	var osMatcherGroup = new MatcherGroup([
+		new Matcher({
+			filterRegex: /ipad|ipod|iphone/i,
+			className: function(ua){
+				var classNames = [];
+				var matches = /CPU( iPhone)? OS ((\d+)[_|\.]\d+([_|\.]\d+)*)/i.exec(ua);
+				if(matches && matches[3]){
+					classNames.push('ios' + matches[3]);
+				}
+
+				matches = /(ip(ad|od|hone))/gi.exec(ua);
+				if(matches)
+					classNames.push(matches[1]);
+
+				return classNames;
+			}
+		}),
+		new Matcher({
+			className: 'mac',
+			filterRegex: /mac/i,
+			subMatchers:[
+				new MatcherGroup([
+					new Matcher({
+						className: function(ua){
+							var matches = /mac os x ((\d+)[.|_](\d+))/.exec(ua);
+							if(matches){
+								return ['mac' + matches[2], 'mac' + matches[1].replace('.',"_")];
+							}
+						}
+					})
+				], true)
+			]		
+		}),
+		new Matcher({
+			className: 'win',
+			filterRegex: /[^r]win/i,
+			subMatchers:[
+				new MatcherGroup([
+					new Matcher({className: 'win8', filterRegex: /windows nt 6.2/i}),
+					new Matcher({className: 'win7', filterRegex: /windows nt 6.1/i}),
+					new Matcher({className: 'vista', filterRegex: /windows nt 6.0/i}),
+					new Matcher({className: 'win_xp', filterRegex: /windows nt 5.2/i}),
+					new Matcher({className: 'win_2k', filterRegex: /windows nt 5.0/i}),
+					new Matcher({className: 'win_nt', filterRegex: /windows nt 4.0/i}),
+				], true)
+			]		
+		}),
+		new Matcher({className: 'playbook', filterRegex: /playbook/i}),
+		new Matcher({className: 'kindle', filterRegex: /kindle|silk/i}),
+		new Matcher({className: 'freebsd', filterRegex: /freebsd/i}),
+		new Matcher({className: 'linux', filterRegex: /x11|linux/i}),
+		new Matcher({className: 'j2me', filterRegex: /j2me/i})
+	], true);
+
+	var mobileMatcher = new Matcher({
+		filterRegex: /android|mobi|mobile|j2me|iphone|ipod|ipad|blackberry|playbook|kindle|silk/i,
+		className: 'mobile'
+	});
+
+	var css_browser_selector = function(ua, el, userMatchers){
+		var ua = (ua || navigator.userAgent).toLowerCase(),
+			el = el || document.documentElement,
+			newClassNames = ['js'],
+			matchers = [
+				browserMatcherGroup,
+				osMatcherGroup,
+				mobileMatcher
+			].concat(userMatchers || []);
+
+		for(var i in matchers){
+			newClassNames = newClassNames.concat(matchers[i].evaluate(ua));
+		}
+
+		el.className = el.className.replace(/\b(no[-|_]?)?js\b/g,"").replace(/^ /, "").replace(/ +/g," ");
+		el.className += ' ' + newClassNames.join(' ');
+
+		return newClassNames;
+	}
+
+	return css_browser_selector(ua, el, userMatchers);
+};
+
+css_browser_selector(navigator.userAgent);
+
+
