@@ -20,6 +20,7 @@ module.exports = function(grunt) {
         frameworks: ['jasmine'],
         plugins : [
           'karma-chrome-launcher',
+          'karma-firefox-launcher',
           'karma-phantomjs-launcher',
           'karma-jasmine'
         ]
@@ -29,7 +30,7 @@ module.exports = function(grunt) {
         browsers: ['PhantomJS']
       },
       dev: {
-        browsers: ['Chrome']
+        browsers: ['Chrome','Firefox']
       }
     },
     watch: {

@@ -8,8 +8,22 @@ var uaStrings = [
 	["Mozilla/5.0 (Macintosh; U; PPC Mac OS X Mach-O; en-US; rv:1.5b) Gecko/20030917 Camino/0.7+"  , "gecko mac"], // camino
 	["Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-US; rv:1.0.1) Gecko/20021104 Chimera/0.6"        , "gecko mac"],  // camino chimera
 	//Chrome
-	["Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.A.B.C Safari/525.13", "webkit chrome win"],
-	["Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.27 Safari/525.13", "webkit chrome win"],
+	["Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.A.B.C Safari/525.13"								, "webkit chrome win"],
+	["Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.27 Safari/525.13"							, "webkit chrome win"],
+	["Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.16 Safari/537.36"											, "webkit chrome win"],
+	["Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1623.0 Safari/537.36"										, "webkit chrome win"],
+	["Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.17 Safari/537.36"										, "webkit chrome win"],
+	["Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.62 Safari/537.36"										, "webkit chrome win"],
+	["Mozilla/5.0 (X11; CrOS i686 4319.74.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36"									, "webkit chrome linux"],
+	["Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.2 Safari/537.36"										, "webkit chrome win"],
+	["Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.45 Safari/535.19"							, "webkit chrome mac"],
+	["Mozilla/5.0 (Macintosh; Intel Mac OS X 10_5_8) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.151 Safari/535.19"							, "webkit chrome mac"],
+	["Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.19 (KHTML, like Gecko) Ubuntu/11.10 Chromium/18.0.1025.142 Chrome/18.0.1025.142 Safari/535.19"	, "webkit chrome linux"],
+	["Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.11 Safari/535.19"							, "webkit chrome mac"],
+	["Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.66 Safari/535.11"											, "webkit chrome linux"],
+	["Mozilla/5.0 (X11; Linux i686) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.66 Safari/535.11"											, "webkit chrome linux"],
+	["Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.66 Safari/535.11"										, "webkit chrome win"],
+	["Mozilla/5.0 (Windows NT 6.2) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.66 Safari/535.11"												, "webkit chrome win"],
 	// Firefox
 	["mozilla/5.0 (macintosh; u; intel mac os x 10.6; en-us; rv:1.9.2.3) gecko/20100401 firefox/3.6.3 gtb7.0", "gecko ff3 ff3_6 mac"], //firefox 3.6 mac
 	["mozilla/5.0 (macintosh; u; intel mac os x 10.5; en-gb; rv:1.9.1) gecko/20090624 firefox/3.5"       , "gecko ff3 ff3_5 mac"], // firefox 3.5 mac
@@ -25,6 +39,26 @@ var uaStrings = [
 	["Mozilla/5.0 (Windows; U; WinNT4.0; en-US; rv:1.3a) Gecko/20021207 Phoenix/0.5"                     , "gecko win"], // firefox phoenix 
 	["Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.2b) Gecko/20020923 Phoenix/0.1"               , "gecko win"], // firefox phoenix xp
 	["Mozilla/3.0 (x86 [en] Windows NT 5.1; Sun)"                                                        , "gecko win"],    // hotjava
+	["Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0"				, "gecko ff25 win"],
+	["Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:25.0) Gecko/20100101 Firefox/25.0"			, "gecko ff25 mac"],
+	["Mozilla/5.0 (X11; Linux i686; rv:21.0) Gecko/20100101 Firefox/21.0"							, "gecko ff21 linux"],
+	["Mozilla/5.0 (Windows NT 6.2; rv:21.0) Gecko/20130326 Firefox/21.0"							, "gecko ff21 win"],
+	["Mozilla/5.0 (Windows NT 6.1; WOW64; rv:21.0) Gecko/20130401 Firefox/21.0"						, "gecko ff21 win"],
+	["Mozilla/6.0 (Windows NT 6.2; WOW64; rv:16.0.1) Gecko/20121011 Firefox/16.0.1"					, "gecko ff16 win"],
+	["Mozilla/5.0 (Windows NT 6.2; WOW64; rv:16.0.1) Gecko/20121011 Firefox/16.0.1"					, "gecko ff16 win"],
+	["Mozilla/5.0 (Windows NT 6.2; Win64; x64; rv:16.0.1) Gecko/20121011 Firefox/16.0.1"			, "gecko ff16 win"],
+	["Mozilla/5.0 (Windows NT 6.1; rv:15.0) Gecko/20120716 Firefox/15.0a2"							, "gecko ff15 win"],
+	["Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.1.16) Gecko/20120427 Firefox/15.0a1"	, "gecko ff15 win"],
+	["Mozilla/5.0 (Windows NT 6.1; WOW64; rv:15.0) Gecko/20120427 Firefox/15.0a1"					, "gecko ff15 win"],
+	["Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.1.16) Gecko/20120421 Firefox/11.0"				, "gecko ff11 linux"],
+	["Mozilla/5.0 (Windows NT 6.1; WOW64; rv:11.0) Gecko Firefox/11.0"								, "gecko ff11 win"],
+	["Mozilla/5.0 (Windows NT 6.1; U;WOW64; de;rv:11.0) Gecko Firefox/11.0"							, "gecko ff11 win"],
+	["Mozilla/5.0 (X11; Linux AMD64) Gecko Firefox/5.0"												, "gecko ff5 linux"],
+	["Mozilla/5.0 (X11; FreeBSD amd64; rv:5.0) Gecko/20100101 Firefox/5.0"							, "gecko ff5 freebsd"],
+	["Mozilla/5.0 (Windows NT 6.2; WOW64; rv:5.0) Gecko/20100101 Firefox/5.0"						, "gecko ff5 win"],
+	["Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:5.0) Gecko/20110619 Firefox/5.0"					, "gecko ff5 win"],
+
+
 	// Navigator
 	["Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.8pre) Gecko/20071019 Firefox/2.0.0.8 Navigator/9.0.0.1" , "gecko ff2 win"], // Navigator 9 with Firefox fixes
 	["Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:1.7.5) Gecko/20050519 Netscape/8.0.1"                         , "gecko win"], // A real Firefox based Netscape 8 with a security patch (already) on Win 2K
@@ -58,6 +92,17 @@ var uaStrings = [
 	["Mozilla/5.0 (compatible; Konqueror/3.1; Linux 2.4.19-32mdkenterprise; X11; i686; ar, en_US)"                              , "konqueror linux"], // Konqueror on KDE 3.1 on Linux Mandrake 9.0 under X windows
 	["Mozilla/5.0 (compatible; Konqueror/2.1.1; X11)"                                                                           , "konqueror linux"],  // Konqueror 2.1.1 (KDE) on Linux Mandrake 8.0 under X windows
 	// Opera
+	["Opera/9.80 (Windows NT 6.0) Presto/2.12.388 Version/12.14"						, "opera opera12 win"	],
+	["Mozilla/5.0 (Windows NT 6.0; rv:2.0) Gecko/20100101 Firefox/4.0 Opera 12.14"		, "opera opera12 win"	],
+	["Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.0) Opera 12.14"					, "opera opera12 win"	],
+	["Opera/9.80 (Windows NT 5.1; U; zh-sg) Presto/2.9.181 Version/12.00"				, "opera opera12 win"	],
+	["Opera/9.80 (X11; Linux i686; U; hu) Presto/2.9.168 Version/11.50"					, "opera opera11 linux"	],
+	["Opera/9.80 (X11; Linux i686; U; ru) Presto/2.8.131 Version/11.11"					, "opera opera11 linux"	],
+	["Opera/9.80 (X11; Linux i686; U; es-ES) Presto/2.8.131 Version/11.11"				, "opera opera11 linux"	],
+	["Opera/9.80 (X11; Linux i686; U; it) Presto/2.7.62 Version/11.00"					, "opera opera11 linux"	],
+	["Opera/9.80 (Windows NT 6.1; U; zh-cn) Presto/2.6.37 Version/11.00"				, "opera opera11 win"	],
+	["Opera/9.80 (Windows NT 6.1; U; pl) Presto/2.7.62 Version/11.00"					, "opera opera11 win"	],
+
 	["opera/9.80 (x11; linux i686; u; en) presto/2.2.15 version/10.01"                           , "opera opera10 linux"], // Opera 10.01
 	["Opera/9.80 (X11; Linux x86_64; U; en) Presto/2.2.15 Version/10.10"                         , "opera opera10 linux"], // Opera 10.10
 	["opera/9.80 (windows nt 6.0; u; en) presto/2.2.15 version/10.00"                            , "opera opera10 win vista"], // Opera 10
@@ -148,6 +193,17 @@ var uaStrings = [
 	["Mozilla/2.0 (compatible; MSIE 3.02; Windows CE; 240x320)"                                                    , "ie ie3 win"], // MSIE 3.02 on a Pocket PC 2002
 	["Mozilla/1.22 (compatible; MSIE 2.0; Windows 95)"                                                             , "ie ie2 win"],   // MSIE 2.0 in windows '95
 	// Safari
+
+	["Mozilla/5.0 (iPad; CPU OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5355d Safari/8536.25"	, "webkit safari safari6 ios6 ipad mobile"],
+	["Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/537.13+ (KHTML, like Gecko) Version/5.1.7 Safari/534.57.2"				, "webkit safari safari5 safari5_1 mac"],
+	["Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; de-at) AppleWebKit/533.21.1 (KHTML, like Gecko) Version/5.0.5 Safari/533.21.1"	, "webkit safari safari5 mac"],
+	["Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; da-dk) AppleWebKit/533.21.1 (KHTML, like Gecko) Version/5.0.5 Safari/533.21.1"	, "webkit safari safari5 mac"],
+	["Mozilla/5.0 (Windows; U; Windows NT 6.1; tr-TR) AppleWebKit/533.20.25 (KHTML, like Gecko) Version/5.0.4 Safari/533.20.27"			, "webkit safari safari5 win"],
+	["Mozilla/5.0 (Windows; U; Windows NT 6.1; ko-KR) AppleWebKit/533.20.25 (KHTML, like Gecko) Version/5.0.4 Safari/533.20.27"			, "webkit safari safari5 win"],
+	["Mozilla/5.0 (Windows; U; Windows NT 5.2; en-US) AppleWebKit/533.17.8 (KHTML, like Gecko) Version/5.0.1 Safari/533.17.8"			, "webkit safari safari5 win"],
+	["Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_4; th-th) AppleWebKit/533.17.8 (KHTML, like Gecko) Version/5.0.1 Safari/533.17.8"	, "webkit safari safari5 mac"],
+	["Mozilla/5.0 (X11; U; Linux x86_64; en-us) AppleWebKit/531.2+ (KHTML, like Gecko) Version/5.0 Safari/531.2+"						, "webkit safari safari5 linux"],
+
 	["mozilla/5.0 (windows; u; windows nt 6.0; pt-br) applewebkit/528.16 (khtml, like gecko) version/4.0 safari/528.16"          , "webkit safari safari4 win vista lang_pt lang_pt_br"],
 	["Mozilla/5.0 (Macintosh; U; Intel Mac OS X; en-gb) AppleWebKit/523.10.6 (KHTML, like Gecko) Version/3.0.4 Safari/523.10.6"  , "webkit safari safari3 mac"], // Safari 3.0.4 on Mac OS 10.5.1 Intel
 	["Mozilla/5.0 (iPod; U; CPU like Mac OS X; en) AppleWebKit/420.1 (KHTML, like Gecko) Version/3.0 Mobile/3A100a Safari/419.3" , "webkit safari safari3 mobile ipod"], // Safari 3.0 for the iPod touch
@@ -173,6 +229,7 @@ var uaStrings = [
 	["blackberry9550/5.0.0.713 profile/midp-2.1 configuration/cldc-1.1 vendorid/105"														, "mobile blackberry"],
 	["Mozilla/5.0 (BlackBerry; U; BlackBerry 9380; en-GB) AppleWebKit/534.11+ (KHTML, like Gecko) Version/7.1.0.117 Mobile Safari/534.11+"	, "mobile blackberry blackberry7_1 blackberry7"]
 ];
+
 
 describe('UA Strings', function(){
 	function uaStringTest(input, output){

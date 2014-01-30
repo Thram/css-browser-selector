@@ -172,8 +172,10 @@ var css_browser_selector = function(ua, el, userMatchers){
 						className: function(ua){
 							var matches = /version\/((\d+)(\.(\d+))(\.\d+)*)/.exec(ua);
 							if(matches){
-								var version = 'safari' + (matches[4] > 0 ? matches[2] + matches[3] : matches[2]).replace('.','_');
-								return [version];
+								var classNames =['safari' + matches[2]];
+								if(matches[4] > 0)
+									classNames.push('safari' + (matches[2] + matches[3]).replace('.','_'));
+								return classNames;
 							}
 
 							matches = / Safari\/(\d+)/i.exec(ua);
