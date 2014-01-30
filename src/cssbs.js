@@ -19,7 +19,7 @@ License: http://creativecommons.org/licenses/by/2.5/
 		Matcher.prototype = {
 			className: null,	// string/function(ua){}
 			subMatchers: null,	// [MatcherGroups]
-			regex: null,
+			filterRegex: null,
 			evaluateSubMatchers: function(ua){
 				var classNames = [];
 				for(var i in this.subMatchers){
@@ -312,10 +312,26 @@ License: http://creativecommons.org/licenses/by/2.5/
 		el.className = el.className.replace(/\b(no[-|_]?)?js\b/g,"").replace(/^ /, "").replace(/ +/g," ");
 		el.className += ' ' + newClassNames.join(' ');
 
+		screenSize(el);
+
 		return newClassNames;
 	};
 
 	window.css_browser_selector = css_browser_selector;
+
+	var screenSize = function(el){
+		var w = window.outerWidth || el.clientWidth,
+			h = window.outerHeight || el.clientHeight,
+			orientation = w < h ? 'portrait' : 'landscape',
+			screens = [320, 480, 640, 768, 1024, 1152, 1280, 1440, 1680, 1920, 2560],
+			maxW;
+
+		el.className = el.className.replace(/ ?orientation_\w+/g, "").replace(/ [min|max|cl]+[w|h]_\d+/g, "");
+
+		for(var i = screens.length - 1; i > 0 && screens[i] >= w; i--){maxW = screens[i];}
+
+		el.className += ' orientation_' + orientation + ' maxw_' + maxW;
+	}
 }());
 
 css_browser_selector(navigator.userAgent);
