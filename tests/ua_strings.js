@@ -148,27 +148,27 @@ var uaStrings = [
 	["Mozilla/2.0 (compatible; MSIE 3.02; Windows CE; 240x320)"                                                    , "ie ie3 win"], // MSIE 3.02 on a Pocket PC 2002
 	["Mozilla/1.22 (compatible; MSIE 2.0; Windows 95)"                                                             , "ie ie2 win"],   // MSIE 2.0 in windows '95
 	// Safari
-	["mozilla/5.0 (windows; u; windows nt 6.0; pt-br) applewebkit/528.16 (khtml, like gecko) version/4.0 safari/528.16"          , "webkit safari safari4 win vista"],
+	["mozilla/5.0 (windows; u; windows nt 6.0; pt-br) applewebkit/528.16 (khtml, like gecko) version/4.0 safari/528.16"          , "webkit safari safari4 win vista lang_pt lang_pt_br"],
 	["Mozilla/5.0 (Macintosh; U; Intel Mac OS X; en-gb) AppleWebKit/523.10.6 (KHTML, like Gecko) Version/3.0.4 Safari/523.10.6"  , "webkit safari safari3 mac"], // Safari 3.0.4 on Mac OS 10.5.1 Intel
 	["Mozilla/5.0 (iPod; U; CPU like Mac OS X; en) AppleWebKit/420.1 (KHTML, like Gecko) Version/3.0 Mobile/3A100a Safari/419.3" , "webkit safari safari3 mobile ipod"], // Safari 3.0 for the iPod touch
 	["Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1C28 Safari/419.3"  , "webkit safari safari3 mobile iphone"], // Safari 3.0 for the iPhone
 	["Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B334b Safari/531.21.10", "webkit safari safari4 mobile ipad"], // Safari 4.0 for the iPad
 	["Mozilla/5.0 (iPad; CPU OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5355d Safari/8536.25", "webkit safari mobile ipad ios6"],
 	["Mozilla/5.0 (Macintosh; U; Intel Mac OS X; en) AppleWebKit/522.11.1 (KHTML, like Gecko) Version/3.0.3 Safari/522.12.1"     , "webkit safari safari3 mac"], // Safari 3.0.3 for Intel version of iMac
-	["Mozilla/5.0 (Windows; U; Windows NT 5.1; bg) AppleWebKit/522.13.1 (KHTML, like Gecko) Version/3.0.2 Safari/522.13.1"       , "webkit safari safari3 win"], // Safari 3.0.2 beta for Windows XP
-	["Mozilla/5.0 (Windows; U; Windows NT 5.1; ru) AppleWebKit/522.11.3 (KHTML, like Gecko) Version/3.0 Safari/522.11.3"         , "webkit safari safari3 win"], // Safari browser V 3.0 Beta for Windows XP SP2
+	["Mozilla/5.0 (Windows; U; Windows NT 5.1; bg) AppleWebKit/522.13.1 (KHTML, like Gecko) Version/3.0.2 Safari/522.13.1"       , "webkit safari safari3 win lang_bg"], // Safari 3.0.2 beta for Windows XP
+	["Mozilla/5.0 (Windows; U; Windows NT 5.1; ru) AppleWebKit/522.11.3 (KHTML, like Gecko) Version/3.0 Safari/522.11.3"         , "webkit safari safari3 win lang_ru"], // Safari browser V 3.0 Beta for Windows XP SP2
 	["Mozilla/5.0 (Macintosh; U; Intel Mac OS X; en) AppleWebKit/419.3 (KHTML, like Gecko) Safari/419.3"                         , "webkit safari mac"], // Safari browser V 2.o.4 with Beta for OS X
 	["Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/418.8 (KHTML, like Gecko) Safari/419.3"                           , "webkit safari mac"], // Safari browser 2.0.4 for MAC OS X (10.4.7)
 	["Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/417.9 (KHTML, like Gecko) Safari/417.8"                           , "webkit safari mac"], // Safari browser 2.0.3 for MAC OS X (10.4.4)
 	["Mozilla/5.0 (Macintosh; U; Intel Mac OS X; en) AppleWebKit/417.3 (KHTML, like Gecko) Safari/417.2"                         , "webkit safari mac"], // Safari browser 2.0 for MAC OS X (10.4.4 build)
 	["Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/412 (KHTML, like Gecko) Safari/412"                               , "webkit safari mac"], // Safari browser 2.0 for MAC OS X (10.4.1 build 8B15)
-	["Mozilla/5.0 (Macintosh; U; PPC Mac OS X; fr-fr) AppleWebKit/312.5.1 (KHTML, like Gecko) Safari/312.3.1"                    , "webkit safari mac"], // Safari 1.3.1 on 1.3.9 after after Security update 2005-008
-	["Mozilla/5.0 (Macintosh; U; PPC Mac OS X; fr-fr) AppleWebKit/312.5 (KHTML, like Gecko) Safari/312.3"                        , "webkit safari mac"], // Safari 1.3.1 (v312.3) 10.3.9 = last update on last version of Panther
+	["Mozilla/5.0 (Macintosh; U; PPC Mac OS X; fr-fr) AppleWebKit/312.5.1 (KHTML, like Gecko) Safari/312.3.1"                    , "webkit safari mac lang_fr lang_fr_fr"], // Safari 1.3.1 on 1.3.9 after after Security update 2005-008
+	["Mozilla/5.0 (Macintosh; U; PPC Mac OS X; fr-fr) AppleWebKit/312.5 (KHTML, like Gecko) Safari/312.3"                        , "webkit safari mac lang_fr lang_fr_fr"], // Safari 1.3.1 (v312.3) 10.3.9 = last update on last version of Panther
 	["Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/124 (KHTML, like Gecko) Safari/125.1"                             , "webkit safari mac"], // Safari browser 1.25.1 for MAC OS 
 	["Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/106.2 (KHTML, like Gecko) Safari/100.1"                           , "webkit safari mac"], // Safari browser 1.0 for MAC OS X
-	["Mozilla/5.0 (Macintosh; U; PPC Mac OS X; es) AppleWebKit/85 (KHTML, like Gecko) Safari/85"                                 , "webkit safari mac"], // Safari browser 1.0 for MAC OS X with spanish language variant
-	["Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-us) AppleWebKit/74 (KHTML, like Gecko) Safari/74"                              , "webkit safari mac"], // Safari browser build 74 for MAC OS X
-	["Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/51 (like Gecko) Safari/51"                                        , "webkit safari mac"], // Safari browser for MAC OS X
+	["Mozilla/5.0 (Macintosh; U; PPC Mac OS X; es) AppleWebKit/85 (KHTML, like Gecko) Safari/85"                                 , "webkit safari mac lang_es"], // Safari browser 1.0 for MAC OS X with spanish language variant
+	["Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-us) AppleWebKit/74 (KHTML, like Gecko) Safari/74"                              , "webkit safari mac lang_en lang_en_us"], // Safari browser build 74 for MAC OS X
+	["Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/51 (like Gecko) Safari/51"                                        , "webkit safari mac lang_en"], // Safari browser for MAC OS X
 	// Blackberry
 	["blackberry9550/5.0.0.713 profile/midp-2.1 configuration/cldc-1.1 vendorid/105"														, "mobile blackberry"],
 	["Mozilla/5.0 (BlackBerry; U; BlackBerry 9380; en-GB) AppleWebKit/534.11+ (KHTML, like Gecko) Version/7.1.0.117 Mobile Safari/534.11+"	, "mobile blackberry blackberry7_1 blackberry7"]

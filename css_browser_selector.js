@@ -1,6 +1,7 @@
 /*
 CSS Browser Selector
 Andrew Carpenter @ Techtopia (http://www.techtopia.com/) 2014
+https://github.com/techtopia/css-browser-selector
 
 Originally written by Rafael Lima (http://rafael.adm.br)
 http://rafael.adm.br/css_browser_selector
@@ -43,8 +44,6 @@ var css_browser_selector = function(ua, el, userMatchers){
 					return this.className;
 				else if (typeof(this.className) == 'function')
 					return this.className(ua);
-				else if (this.className instanceof RegExp)
-					return this.className.exec(ua).slice(1);
 			}
 		};
 
