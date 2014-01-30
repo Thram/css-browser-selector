@@ -6,15 +6,15 @@ module.exports = function(grunt) {
         banner: '/*! <%= pkg.homepage %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
       build: {
-        src: '<%= pkg.name %>.js',
-        dest: '<%= pkg.name %>.min.js'
+        src: 'src/cssbs.js',
+        dest: 'dist/<%= pkg._shortName %>-<%= pkg.version %>.min.js'
       }
     },
     karma: {
       options: {
         files : [
-          'css_browser_selector.js',
-          'tests/ua_strings.js'
+          'src/cssbs.js',
+          'test/ua_strings.js'
         ],
         background: true,
         frameworks: ['jasmine'],
@@ -35,22 +35,26 @@ module.exports = function(grunt) {
     },
     watch: {
       karma: {
-        files: ['*.js', 'tests/*.js'],
+        files: ['src/*.js', 'test/*.js'],
         tasks: ['jshint:dev', 'karma:dev:run']
       }
     },
     jshint: {
-      dev: ['css_browser_selector.js'],
+      dev: ['src/cssbs.js'],
       options:{force:true}
-    }
+    },
+    clean: ['/dist'],
+    copy: {main: {src: 'src/cssbs.js', dest: 'dist/<%= pkg._shortName %>-<%= pkg.version %>.js'}}
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-karma');
 
-  grunt.registerTask('default', ['karma:continuous', 'uglify']);
+  grunt.registerTask('default', ['karma:continuous', 'clean', 'copy', 'uglify']);
   grunt.registerTask('devmode', ['jshint:dev', 'karma:dev', 'watch']);
 
 };

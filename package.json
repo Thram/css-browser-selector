@@ -1,6 +1,7 @@
 {
   "name": "css_browser_selector",
-  "version": "0.7.0",
+  "_shortName": "cssbs",
+  "version": "1.0.1",
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-contrib-jshint": "~0.6.3",
@@ -17,15 +18,17 @@
     "karma-phantomjs-launcher": "~0.1.1",
     "karma": "~0.10.9",
     "grunt-karma": "~0.6.2",
-    "grunt-contrib-watch": "~0.5.3"
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-clean": "~0.5.0"
   },
   "description": "A javascript library for creating browser specific CSS",
-  "main": "css_browser_selector.js",
+  "main": "src/cssbs.js",
   "directories": {
-    "test": "tests"
+    "test": "test"
   },
   "scripts": {
-    "test": "karma start config/karma.conf.js"
+    "test": "grunt devmode"
   },
   "repository": {
     "type": "git",

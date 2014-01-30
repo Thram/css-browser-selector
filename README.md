@@ -32,15 +32,25 @@ beta/experimental versions: [https://github.com/verbatim/css_browser_selector/](
 	    .js { display: none; }
     </style>
 
+## Versions
+
+### 1.0.1
+* Refactoring with introduction of Matcher and MatcherGroup objects.
+* Moved test cases to Jasmine
+* Added test cases covering newer Safari/Chrome/FF/IE
+* Removal of screen size classes
+* Added optional arguments to allow attaching classes to elements other than body and defining custom UA matchers.
+* Added gruntfile
+
 ## Options  
 
 		css_browser_selector(userAgent, element, userMatchers);
 
-* ####userAgent
+* userAgent
 optional: Specify a user agent string to parse. If no user agent is specified, navigator.userAgent is used instead
-* ####element
+* element
 optional: Specify which element to attach the classes to. If not specified, these will be attached to \<body\>.
-* ####userMatchers
+* userMatchers
 optional: Define additional matchers for assigning classes. See source for examples.
 
 
