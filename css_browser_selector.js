@@ -1,12 +1,10 @@
 /*
-CSS Browser Selector 0.6.1
+CSS Browser Selector
+Andrew Carpenter @ Techtopia (http://www.techtopia.com/) 2014
+
 Originally written by Rafael Lima (http://rafael.adm.br)
 http://rafael.adm.br/css_browser_selector
 License: http://creativecommons.org/licenses/by/2.5/
-
-Co-maintained by:
-https://github.com/verbatim/css_browser_selector
-
 */
 var css_browser_selector = function(ua, el, userMatchers){
 	var Matcher = function(){
@@ -14,11 +12,11 @@ var css_browser_selector = function(ua, el, userMatchers){
 			this.className = options.className;
 			this.filterRegex = options.filterRegex;
 			this.subMatchers = options.subMatchers;
-		}
+		};
 
 		Matcher.prototype = {
-			className: null, 	// string/function(ua){}
-			subMatchers: null, 	// [MatcherGroups]
+			className: null,	// string/function(ua){}
+			subMatchers: null,	// [MatcherGroups]
 			regex: null,
 			evaluateSubMatchers: function(ua){
 				var classNames = [];
@@ -28,7 +26,7 @@ var css_browser_selector = function(ua, el, userMatchers){
 				return classNames;
 			},
 			evaluate: function(ua){
-				var classNames = [];
+				var classNames = []; 
 				
 				if(!this.filterRegex || this.filterRegex.test(ua)){
 					if(this.className) 
@@ -48,7 +46,7 @@ var css_browser_selector = function(ua, el, userMatchers){
 				else if (this.className instanceof RegExp)
 					return this.className.exec(ua).slice(1);
 			}
-		}
+		};
 
 		return Matcher;
 	}();
@@ -57,7 +55,7 @@ var css_browser_selector = function(ua, el, userMatchers){
 		var MatcherGroup = function(matcherArray, exclusive){
 			this.matcherArray = matcherArray;
 			this.exclusive = exclusive;
-		}
+		};
 
 		MatcherGroup.prototype = {
 			matcherArray: null,
@@ -75,7 +73,7 @@ var css_browser_selector = function(ua, el, userMatchers){
 				}
 				return classNames;
 			}
-		}
+		};
 
 		return MatcherGroup;
 	}();
@@ -180,7 +178,7 @@ var css_browser_selector = function(ua, el, userMatchers){
 							}
 
 							matches = / Safari\/(\d+)/i.exec(ua);
-							var wkVersion = parseInt(matches[1]);
+							var wkVersion = parseInt(matches[1], 10);
 							if(wkVersion){
 								if(wkVersion < 100) return ['safari1_0'];
 								else if(wkVersion < 125) return ['safari1_2'];
@@ -274,6 +272,20 @@ var css_browser_selector = function(ua, el, userMatchers){
 		className: 'mobile'
 	});
 
+	var languageMatcher = new Matcher({
+		className: function(ua){
+			var matches = /[; |\[](([a-z]{2})(\-[a-z]{2})?)[)|;|\]]/i.exec(ua);
+			if(matches){
+				var classNames = [];
+				classNames.push(('lang_' + matches[2]).replace('-','_'));
+				if(matches[3])
+					classNames.push(('lang_' + matches[1]).replace('-','_'));
+
+				return classNames;
+			}
+		}
+	});
+
 	var css_browser_selector = function(ua, el, userMatchers){
 		var ua = (ua || navigator.userAgent).toLowerCase(),
 			el = el || document.documentElement,
@@ -281,7 +293,8 @@ var css_browser_selector = function(ua, el, userMatchers){
 			matchers = [
 				browserMatcherGroup,
 				osMatcherGroup,
-				mobileMatcher
+				mobileMatcher,
+				languageMatcher
 			].concat(userMatchers || []);
 
 		for(var i in matchers){
@@ -292,7 +305,7 @@ var css_browser_selector = function(ua, el, userMatchers){
 		el.className += ' ' + newClassNames.join(' ');
 
 		return newClassNames;
-	}
+	};
 
 	return css_browser_selector(ua, el, userMatchers);
 };
