@@ -46,11 +46,11 @@ beta/experimental versions: [https://github.com/verbatim/css_browser_selector/](
 
 		css_browser_selector(userAgent, element, userMatchers);
 
-* userAgent
+* userAgent  
 optional: Specify a user agent string to parse. If no user agent is specified, navigator.userAgent is used instead
-* element
-optional: Specify which element to attach the classes to. If not specified, these will be attached to \<body\>.
-* userMatchers
+* element  
+optional: Specify which element to attach the classes to. If not specified, these will be attached to \<html\>.
+* userMatchers  
 optional: Define additional matchers for assigning classes. See source for examples.
 
 
