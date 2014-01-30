@@ -322,7 +322,6 @@ License: http://creativecommons.org/licenses/by/2.5/
 	var screenSize = function(el){
 		var w = window.outerWidth || el.clientWidth,
 			h = window.outerHeight || el.clientHeight,
-			orientation = w < h ? 'portrait' : 'landscape',
 			screens = [320, 480, 640, 768, 1024, 1152, 1280, 1440, 1680, 1920, 2560],
 			maxW;
 
@@ -330,8 +329,8 @@ License: http://creativecommons.org/licenses/by/2.5/
 
 		for(var i = screens.length - 1; i > 0 && screens[i] >= w; i--){maxW = screens[i];}
 
-		el.className += ' orientation_' + orientation + ' maxw_' + maxW;
-	}
+		el.className += ' orientation_' + (w < h ? 'portrait' : 'landscape') + ' maxw_' + maxW;
+	};
 }());
 
 css_browser_selector(navigator.userAgent);

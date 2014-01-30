@@ -27,6 +27,7 @@ module.exports = function(grunt) {
       },
       continuous: {
         singleRun: true,
+        background:false,
         browsers: ['PhantomJS']
       },
       dev: {
@@ -55,6 +56,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-karma');
 
   grunt.registerTask('default', ['karma:continuous', 'clean', 'copy', 'uglify']);
-  grunt.registerTask('devmode', ['jshint:dev', 'karma:dev', 'watch']);
+  grunt.registerTask('devmode', ['jshint:dev', 'karma', 'watch']);
 
 };
