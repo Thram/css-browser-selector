@@ -92,15 +92,17 @@
                     new Matcher({
                         className: function (ua) {
                             var matches = /version\/((\d+)(\.(\d+))(\.\d+)*)/i.exec(ua);
-                            if (matches)
+                            if (matches) {
                                 return ['opera' + matches[2], 'opera' + matches[2] + '_' + matches[4]];
+                            }
                         }
                     }),
                     new Matcher({
                         className: function (ua) {
                             var matches = /opera(\s|\/)(\d+)\.(\d+)/i.exec(ua);
-                            if (matches)
+                            if (matches) {
                                 return ['opera' + matches[2], 'opera' + matches[2] + '_' + matches[3]];
+                            }
                         }
                     })
                 ], true)
@@ -127,7 +129,9 @@
                                     version = parseInt(verMap[matches[1]], 10);
                                 }
                             }
-                            if (version && version < 11) classNames.push('lt_ie11');
+                            if (version && version < 11) {
+                                classNames.push('lt_ie11');
+                            }
 
 
                             return classNames;
@@ -149,8 +153,9 @@
 
                             if (matches) {
                                 var classes = ['blackberry' + matches[1]];
-                                if (matches[3] > 0)
+                                if (matches[3] > 0) {
                                     classes.push('blackberry' + matches[1] + '_' + matches[3]);
+                                }
                                 return classes;
                             }
                         }
@@ -166,8 +171,9 @@
                     new Matcher({
                         className: function (ua) {
                             var matches = /chrome\/((\d+)(\.(\d+))(\.\d+)*)/i.exec(ua);
-                            if (matches)
+                            if (matches) {
                                 return ['chrome' + matches[2] , 'chrome' + matches[2] + "_" + matches[4]];
+                            }
                         }
                     })
                 ], true)
@@ -183,18 +189,27 @@
                             var matches = /version\/((\d+)(\.(\d+))(\.\d+)*)/.exec(ua);
                             if (matches) {
                                 var classNames = ['safari' + matches[2]];
-                                if (matches[4] > 0)
+                                if (matches[4] > 0) {
                                     classNames.push('safari' + (matches[2] + matches[3]).replace('.', '_'));
+                                }
                                 return classNames;
                             }
 
                             matches = / Safari\/(\d+)/i.exec(ua);
                             var wkVersion = parseInt(matches[1], 10);
                             if (wkVersion) {
-                                if (wkVersion < 100) return ['safari1_0'];
-                                else if (wkVersion < 125) return ['safari1_2'];
-                                else if (wkVersion < 412) return ['safari1_3'];
-                                else if (wkVersion < 522) return ['safari2_0'];
+                                if (wkVersion < 100) {
+                                    return ['safari1_0'];
+                                }
+                                else if (wkVersion < 125) {
+                                    return ['safari1_2'];
+                                }
+                                else if (wkVersion < 412) {
+                                    return ['safari1_3'];
+                                }
+                                else if (wkVersion < 522) {
+                                    return ['safari2_0'];
+                                }
                             }
                         }
                     })
@@ -211,8 +226,9 @@
                             var matches = /firefox\/((\d+)(\.(\d+))(\.\d+)*)/i.exec(ua);
                             if (matches) {
                                 var classes = ['ff' + matches[2]];
-                                if (matches[4] > 0)
+                                if (matches[4] > 0) {
                                     classes.push('ff' + matches[2] + '_' + matches[4]);
+                                }
                                 return classes;
                             }
                         }
@@ -235,8 +251,9 @@
                 }
 
                 matches = /(ip(ad|od|hone))/gi.exec(ua);
-                if (matches)
+                if (matches) {
                     classNames.push(matches[1]);
+                }
 
                 return classNames;
             }
@@ -268,7 +285,7 @@
                     new Matcher({className: 'win_2k3', filterRegex: /windows nt 5.1/i}),
                     new Matcher({className: 'win_xp', filterRegex: /windows nt 5.2/i}),
                     new Matcher({className: 'win_2k', filterRegex: /windows nt 5.0/i}),
-                    new Matcher({className: 'win_nt', filterRegex: /windows nt 4.0/i}),
+                    new Matcher({className: 'win_nt', filterRegex: /windows nt 4.0/i})
                 ], true)
             ]
         }),

@@ -191,6 +191,7 @@ var uaStrings = [
 	["Mozilla/4.0 (compatible; MSIE 4.01; Windows NT 5.0)"                                                         , "ie ie4 lt_ie11 win"], // Explanation: MSIE 4.01 on Windows XP SP2
 	["Mozilla/2.0 (compatible; MSIE 3.02; Windows CE; 240x320)"                                                    , "ie ie3 lt_ie11 win"], // MSIE 3.02 on a Pocket PC 2002
 	["Mozilla/1.22 (compatible; MSIE 2.0; Windows 95)"                                                             , "ie ie2 lt_ie11 win"],   // MSIE 2.0 in windows '95
+    ["Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; WOW64; Trident/4.0; uZard/1.0; Server_KO_SKT)"            , "ie ie8 lt_ie11 win_2k3"],
 	// Safari
 
 	["Mozilla/5.0 (iPad; CPU OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5355d Safari/8536.25"	, "webkit safari safari6 ios6 ipad mobile"],
