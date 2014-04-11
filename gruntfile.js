@@ -56,6 +56,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-karma');
 
   grunt.registerTask('default', ['karma:continuous', 'clean', 'copy', 'uglify']);
-  grunt.registerTask('devmode', ['jshint:dev', 'karma', 'watch']);
+  grunt.registerTask('devmode', ['jshint:dev', 'karma:dev', 'watch']);
 
 };
