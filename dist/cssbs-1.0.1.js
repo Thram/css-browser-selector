@@ -279,6 +279,7 @@
             filterRegex: /[^r]win/i,
             subMatchers: [
                 new MatcherGroup([
+                    new Matcher({className: 'win81', filterRegex: /windows nt 6.3/i}),
                     new Matcher({className: 'win8', filterRegex: /windows nt 6.2/i}),
                     new Matcher({className: 'win7', filterRegex: /windows nt 6.1/i}),
                     new Matcher({className: 'vista', filterRegex: /windows nt 6.0/i}),
